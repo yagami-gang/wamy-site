@@ -22,12 +22,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware'=>'auth','web'],function(){
-    Route::resource('user', 'UserController');
+    Route::resource('user', 'App\Http\Controllers\UserController');
     Route::resource('demande', DemandeController::class);
-    Route::resource('rapport', 'RapportController');
-    Route::resource('type', 'TypeController');
-    Route::resource('informaticien', 'InformaticienController');
-    Route::resource('typeuser', 'TypeUserController');
+    Route::resource('rapport', 'App\Http\Controllers\RapportController');
+    Route::resource('type', 'App\Http\Controllers\TypeController');
+    Route::resource('informaticien', 'App\Http\Controllers\InformaticienController');
+    Route::POST('/validate/{id}',[App\Http\Controllers\InformaticienController::class,'validation'])->name('informaticien.validate');
+    Route::resource('typeuser', 'App\Http\Controllers\TypeUserController');
     Route::resource('reseau', ReseauController::class);
     Route::resource('materiel', MaterielController::class);
 });

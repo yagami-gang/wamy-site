@@ -2,6 +2,9 @@
 @section('title')
 dashboard informaticien
 @endsection
+@section('menu')
+    @include('informaticien.menu')
+@endsection
 @section('content')
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->

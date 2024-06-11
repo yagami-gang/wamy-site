@@ -1,7 +1,7 @@
 <?php 
 
 namespace App\Http\Controllers;
-
+use App\Models\Demande;
 use Illuminate\Http\Request;
 
 class InformaticienController extends Controller 
@@ -14,7 +14,10 @@ class InformaticienController extends Controller
    */
   public function index()
   {
-   
+    $demandes = Demande::select('id', 'statut', 'motif', 'date', 'libelle')
+                   ->orderBy('date', 'asc')
+                   ->paginate(30);
+   return view('informaticien.demande.index',compact('demandes'));
   }
 
   public function home()
@@ -85,6 +88,14 @@ class InformaticienController extends Controller
     
   }
   
+  public function validation($id)
+  {
+    $demande = Demande::find($id);
+    $demandes->statut = 'en_cours';
+    $message = 'demande mis à jour avec succès';
+    session()->flash('message',$message);
+    return redirect()->back();
+  }
 }
 
 ?>
